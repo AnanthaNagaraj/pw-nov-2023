@@ -12,6 +12,11 @@
 
 */
 
+/**
+ * 
+ * @param {*} score 
+ * @returns 
+ */
 function calculateGrade(score){
    let grade;
    switch (true) {

@@ -29,5 +29,5 @@ function checkNumberType(num){
    }
 }
 
-const input = 10;
-checkNumberType(input);
+const inputNumber = 10;
+checkNumberType(inputNumber);
