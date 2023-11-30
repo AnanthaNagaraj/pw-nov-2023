@@ -28,6 +28,10 @@ Write a function to check if two strings are anagrams.
 const str1 = "Hello World";
 const str2 = "   fly me   to   the moon  ";
 
+/**
+ * 
+ * @param {*} str1 
+ */
 function countLastWord(str1){
 
     if(str1.length==0)
@@ -44,7 +48,11 @@ countLastWord(str1)
 // Example 2
 countLastWord(str2)
 
-
+/**
+ * 
+ * @param {*} myStr1 
+ * @param {*} myStr2 
+ */
 function isAnagram(myStr1,myStr2){
     const outPut1=myStr1.split('').sort().join('').toLowerCase();
     const outPut2=myStr2.split('').sort().join('').toLowerCase();
