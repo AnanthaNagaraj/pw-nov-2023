@@ -1,4 +1,4 @@
-import { chromium, firefox, test } from "@playwright/test";
+import { chromium, expect, firefox, test } from "@playwright/test";
 
 /**
  * 1. Launch the browser
@@ -30,14 +30,33 @@ test("Launch Leaf Tap and Creat Lead", async() =>{
     console.log("TEXT : "+await page.locator("//a[contains (text(), '/SFA')]").innerText());
     await page.getByText('CRM/SFA').click()
     await page.waitForLoadState();
+   
     await page.locator("//a[contains (text(), 'Leads')]").click();
     await page.click("text=Create Lead"); // CSS 
+    await page.waitForLoadState('load');
+    console.log("---->>:: "+await page.title());
+    
+    expect.soft(await page.title()).toBe("Create Lead | opentaps CRM") // soft assertion
+    
     await page.fill("#createLeadForm_companyName","TestLeaf")
     await page.locator("#createLeadForm_firstName").fill("Anantha");
     await page.locator("#createLeadForm_lastName").fill("N");
+    
+    // DropDown value selection
+    //Source
+    await page.selectOption("#createLeadForm_dataSourceId", {label:'Direct Mail'}); // label
+    // Marketing Campaign
+    await page.selectOption("#createLeadForm_marketingCampaignId", {value:'9000'}); // value
+    // Industry
+    await page.selectOption("#createLeadForm_industryEnumId", {index:1}); // index
+    
+    await page.waitForTimeout(5000);
+
     await page.locator("input[type=submit]").click();
+
+    
     await page.waitForLoadState();
     const status=await page.locator("#viewLead_statusId_sp").innerText();
-    console.log("STATUS"+status);
+    console.log("STATUS :: "+status);
     
 });
